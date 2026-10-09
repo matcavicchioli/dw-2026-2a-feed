@@ -1,104 +1,151 @@
+<?php require_once "verificar_sessao.php"; ?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        div {
-            border-style: solid;
-            padding: 10px;
-        }
-
-        .postagens {
-            border-color: blue;
-        }
-
-        .postagem {
-            border-color: black;
-            margin: 10px;
-        }
-
-        .comentarios {
-            border-color: green;
-        }
-    </style>
+    <title>Lista de postagens</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <h2>Lista de postagens</h2>
+    <a href="principal.php"><button>voltar</button></a>
+    <a href="index.php"><button>sair</button></a>
 
-    <!-- tabela -->
+    <h2>INSTAGRADO</h2>
+
     <div class="postagens">
+        <a href="cad_postagem.php"><button>POSTAR</button></a>
+
         <?php
         require_once "conexao.php";
 
-        $sql = "SELECT postagem.idpostagem, postagem.texto, postagem.data_hora, usuario.idusuario, usuario.nome, usuario.apelido, usuario.foto
-        FROM postagem, usuario
-        WHERE postagem.idusuario = usuario.idusuario;";
-
+        $sql = "SELECT * FROM postagem";
         $resultados = mysqli_query($conexao, $sql);
 
         while ($linha = mysqli_fetch_array($resultados)) {
+
             $idpostagem = $linha['idpostagem'];
             $texto = $linha['texto'];
             $data_hora = $linha['data_hora'];
             $idusuario = $linha['idusuario'];
 
-            $foto = $linha['foto'];
-            $nome = $linha['nome'];
-            $apelido = $linha['apelido'];
+            // Busca o usuário da postagem
+            $sql2 = "SELECT * FROM usuario WHERE idusuario = $idusuario";
+            $resultado = mysqli_query($conexao, $sql2);
+            $usuario = mysqli_fetch_array($resultado);
 
-            echo "<div class='postagem'>";
+            $foto = $usuario['foto'];
+            $nome = $usuario['nome'];
 
-            echo "<div>";
-            echo "<img src='$foto'>";
-            echo "$nome";
-            echo $data_hora;
-            echo "</div>";
+            ?>
 
-            echo $texto;
+            <!-- INÍCIO DA POSTAGEM -->
+            <div class="postagem">
 
-            //caixa dos comentarios
-            $sql3 = "SELECT comentario.idcomentario, comentario.idpostagem, comentario.texto, usuario.idusuario, usuario.nome, usuario.apelido, usuario.foto
-            FROM comentario, usuario
-            WHERE idpostagem = $idpostagem
-            AND comentario.idusuario = usuario.idusuario
-            ORDER BY comentario.idcomentario ASC;";
+                <!-- Cabeçalho -->
+                <div class="cabecalho-postagem">
 
-            $comentarios = mysqli_query($conexao, $sql3);
+                    <img src="<?php echo $foto; ?>">
 
-            if (mysqli_num_rows($comentarios) == 0) {
-                echo "<br>Essa postagem não possui comentários.";
-            } else {
-                echo "<div class='comentarios'>";
-                // listar comentários aqui
+                    <span class="nome-usuario">
+                        <?php echo $nome; ?>
+                    </span>
 
-                while ($comentario = mysqli_fetch_array($comentarios)) {
-                    $idusuario_comentario = $comentario['idusuario'];
-                    $texto_comentario = $comentario['texto'];
+                    <span class="datahora">
+                        <?php echo $data_hora; ?>
+                    </span>
 
-                    $foto_usuario_comentario = $comentario['foto'];
+                </div>
 
-                    echo "<div>";
-                    echo "<img src='imagem_usuario/$foto_usuario_comentario'>";
-                    echo $texto_comentario;
-                    echo "</div>";
-                }
-        ?>
-                <form action="salvar_comentario.php">
-                    <input type="text">
-                    <input type="submit" value="Comentar">
-                </form>
 
-        <?php
-                echo "</div>";
-            }
-            echo "</div>";
+                <!-- Texto da postagem -->
+                <div class="texto-postagem">
+                    <?php echo $texto; ?>
+                </div>
+
+
+                <!-- Comentários -->
+                <div class="comentarios">
+
+                    <?php
+
+                    $sql3 = "SELECT * FROM comentario WHERE idpostagem = $idpostagem";
+                    $comentarios = mysqli_query($conexao, $sql3);
+
+                    if (mysqli_num_rows($comentarios) == 0) {
+
+                        echo "<p class='sem-comentarios'>Essa postagem não possui comentários.</p>";
+
+                    } else {
+
+                        while ($comentario = mysqli_fetch_array($comentarios)) {
+
+                            $idusuario_comentario = $comentario['idusuario'];
+                            $texto_comentario = $comentario['texto'];
+
+                            // Busca o usuário do comentário
+                            $sql4 = "SELECT * FROM usuario WHERE idusuario = $idusuario_comentario";
+                            $resultado = mysqli_query($conexao, $sql4);
+                            $usuario_comentario = mysqli_fetch_array($resultado);
+
+                            $foto_usuario_comentario = $usuario_comentario['foto'];
+
+                            ?>
+
+                            <div class="comentario">
+
+                                <img src="imagem_usuario/<?php echo $foto_usuario_comentario; ?>">
+
+                                <span>
+                                    <?php echo $texto_comentario; ?>
+                                </span>
+
+                            </div>
+
+                            <?php
+                        }
+                    }
+
+                    ?>
+
+
+                    <!-- Formulário -->
+                    <form action="salvar_comentario.php" method="POST">
+
+                        <input
+                            type="hidden"
+                            name="idpostagem"
+                            value="<?php echo $idpostagem; ?>"
+                        >
+
+                        <input
+                            type="text"
+                            name="texto"
+                            placeholder="Digite seu comentário"
+                            required
+                        >
+
+                        <input
+                            type="submit"
+                            value="Comentar"
+                        >
+
+                    </form>
+
+                </div>
+
+            </div>
+            <!-- FIM DA POSTAGEM -->
+
+            <?php
         }
         ?>
+
     </div>
+
 </body>
 
 </html>
