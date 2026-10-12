@@ -3,7 +3,6 @@
 require_once "verificar_sessao.php";
 require_once "conexao.php";
 
-$idusuario_logado = $_SESSION['idusuario'];
 
 // Temporariamente, mostra apenas as próprias postagens.
 // Depois vamos incluir as postagens de quem o usuário segue.
@@ -11,7 +10,7 @@ $sql = "SELECT postagem.*, usuario.nome, usuario.foto
         FROM postagem
         INNER JOIN usuario
         ON postagem.idusuario = usuario.idusuario
-        WHERE postagem.idusuario = $idusuario_logado
+        WHERE postagem.idusuario = $idusuariO
         ORDER BY postagem.data_hora DESC";
 
 $resultados = mysqli_query($conexao, $sql);
