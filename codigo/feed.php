@@ -3,7 +3,7 @@
 require_once "verificar_sessao.php";
 require_once "conexao.php";
 
-$idusuario = $_SESSION['idusuario'];
+$idusuario = $usuario['idusuario'];
 
 // Temporariamente, mostra apenas as próprias postagens.
 // Depois vamos incluir as postagens de quem o usuário segue.
