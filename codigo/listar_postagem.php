@@ -22,7 +22,7 @@
         <?php
         require_once "conexao.php";
 
-        $sql = "SELECT * FROM postagem";
+        $sql = "SELECT * FROM postagem WHERE idusuario = $idusuario";
         $resultados = mysqli_query($conexao, $sql);
 
         while ($linha = mysqli_fetch_array($resultados)) {

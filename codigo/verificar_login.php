@@ -20,7 +20,7 @@ if ($quantidade == 1) {
     $_SESSION['email'] = $usuario['email'];
     $_SESSION['foto'] = $usuario['foto'];
 
-    header("Location: home.php");
+    header("Location: feed.php");
 }
 else {
     header("Location: index.php");

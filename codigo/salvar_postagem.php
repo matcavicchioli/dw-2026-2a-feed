@@ -1,7 +1,6 @@
 <?php
 require_once "verificar_sessao.php";
 
-session_start();
 require_once "conexao.php";
 
 $texto = $_GET['texto'];
@@ -11,5 +10,5 @@ $sql = "INSERT INTO postagem (texto, idusuario) VALUES ('$texto', $idusuario)";
 
 mysqli_query($conexao, $sql);
 
-header("Location: home.php");
+header("Location: feed.php");
 ?>
