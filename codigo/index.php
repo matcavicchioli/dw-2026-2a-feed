@@ -6,7 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="verificar_login.php" method="post">
+    <form action="verificar_login.php" method="POST">
         E-mail: <br>
         <input type="text" name="email"> <br><br>
         Senha: <br>
