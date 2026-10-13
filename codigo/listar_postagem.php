@@ -11,13 +11,13 @@
 </head>
 
 <body>
-    <a href="principal.php"><button>voltar</button></a>
+    <a href="home.php"><button>voltar</button></a>
     <a href="index.php"><button>sair</button></a>
 
     <h2>INSTAGRADO</h2>
 
     <div class="postagens">
-        <a href="form_postagem.php"><button>POSTAR</button></a>
+        <a href="cad_postagem.php"><button>POSTAR</button></a>
 
         <?php
         require_once "conexao.php";
