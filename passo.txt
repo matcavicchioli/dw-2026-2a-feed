@@ -1,0 +1,7 @@
+1 - Quem está logado?
+2 - O usuário logado segue alguém?
+3 - Sim? 
+4 - Quem?
+5 - O "Quem" tem post?
+6 - Sim?
+7 - Ordenar originalmente por N° de curtidas e por data(postagens mais recentes)

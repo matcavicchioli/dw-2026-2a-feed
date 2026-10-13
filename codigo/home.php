@@ -12,6 +12,7 @@
 <body>
     <a href="form_postagem.php" class="href">Nova postagem</a> <br>
     <a href="listar_postagem.php" class="href">Ver postagens</a> <br>
+    <a href="listar.php" class="href">listar ne zé</a> <br>
     <a href="deslogar.php" class="href">Sair...</a>
 </body>
 </html>
