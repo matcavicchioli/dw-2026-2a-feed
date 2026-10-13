@@ -17,7 +17,7 @@
     <h2>INSTAGRADO</h2>
 
     <div class="postagens">
-        <a href="cad_postagem.php"><button>POSTAR</button></a>
+        <a href="form_postagem.php"><button>POSTAR</button></a>
 
         <?php
         require_once "conexao.php";
