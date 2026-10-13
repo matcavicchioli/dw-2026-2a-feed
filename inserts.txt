@@ -1,0 +1,274 @@
+-- ============================================
+-- MASSA DE TESTES SIMPLES - REDE SOCIAL
+-- MySQL
+-- ============================================
+
+-- USUARIOS
+INSERT INTO usuario
+(idusuario, nome, apelido, email, senha, foto)
+VALUES
+(1, 'Ana', 'Ana', 'ana@teste.com', '123', 'ana.jpg'),
+(2, 'Bruno', 'Bruno', 'bruno@teste.com', '123', 'bruno.jpg'),
+(3, 'Carla', 'Carla', 'carla@teste.com', '123', 'carla.jpg'),
+(4, 'Daniel', 'Daniel', 'daniel@teste.com', '123', 'daniel.jpg'),
+(5, 'Eduarda', 'Eduarda', 'eduarda@teste.com', '123', 'eduarda.jpg'),
+(6, 'Felipe', 'Felipe', 'felipe@teste.com', '123', 'felipe.jpg'),
+(7, 'Gabriela', 'Gabriela', 'gabriela@teste.com', '123', 'gabriela.jpg'),
+(8, 'Henrique', 'Henrique', 'henrique@teste.com', '123', 'henrique.jpg'),
+(9, 'Isabela', 'Isabela', 'isabela@teste.com', '123', 'isabela.jpg'),
+(10, 'Joao', 'Joao', 'joao@teste.com', '123', 'joao.jpg'),
+(11, 'Karen', 'Karen', 'karen@teste.com', '123', 'karen.jpg'),
+(12, 'Lucas', 'Lucas', 'lucas@teste.com', '123', 'lucas.jpg'),
+(13, 'Mariana', 'Mariana', 'mariana@teste.com', '123', 'mariana.jpg'),
+(14, 'Nicolas', 'Nicolas', 'nicolas@teste.com', '123', 'nicolas.jpg'),
+(15, 'Olivia', 'Olivia', 'olivia@teste.com', '123', 'olivia.jpg'),
+(16, 'Pedro', 'Pedro', 'pedro@teste.com', '123', 'pedro.jpg'),
+(17, 'Rafaela', 'Rafaela', 'rafaela@teste.com', '123', 'rafaela.jpg'),
+(18, 'Samuel', 'Samuel', 'samuel@teste.com', '123', 'samuel.jpg'),
+(19, 'Tiago', 'Tiago', 'tiago@teste.com', '123', 'tiago.jpg'),
+(20, 'Maria', 'Maria', 'maria@teste.com', '123', 'maria.jpg');
+
+-- POSTAGENS
+INSERT INTO postagem
+(idpostagem, texto, data_hora, idusuario)
+VALUES
+(1, 'Postagem 1', '2026-01-01 08:00:00', 1),
+(2, 'Postagem 2', '2026-01-02 08:00:00', 1),
+(3, 'Postagem 3', '2026-01-03 08:00:00', 1),
+(4, 'Postagem 4', '2026-01-04 08:00:00', 1),
+(5, 'Postagem 5', '2026-01-05 08:00:00', 1),
+(6, 'Postagem 6', '2026-01-01 09:00:00', 2),
+(7, 'Postagem 7', '2026-01-02 09:00:00', 2),
+(8, 'Postagem 8', '2026-01-03 09:00:00', 2),
+(9, 'Postagem 9', '2026-01-01 10:00:00', 3),
+(10, 'Postagem 10', '2026-01-02 10:00:00', 3),
+(11, 'Postagem 11', '2026-01-01 11:00:00', 4),
+(12, 'Postagem 12', '2026-01-01 12:00:00', 5),
+(13, 'Postagem 13', '2026-01-02 12:00:00', 6),
+(14, 'Postagem 14', '2026-01-03 12:00:00', 7),
+(15, 'Postagem 15', '2026-01-04 12:00:00', 8),
+(16, 'Postagem 16', '2026-01-05 12:00:00', 9),
+(17, 'Postagem 17', '2026-01-06 12:00:00', 10);
+
+-- SEGUIDORES
+-- Cada par aparece uma unica vez.
+INSERT INTO seguir (idseguidor, idseguindo)
+VALUES
+(2,1),
+(3,1),
+(4,1),
+(5,1),
+(6,1),
+(7,1),
+(8,1),
+(9,1),
+(10,1),
+(11,1),
+(12,1),
+(13,1),
+(14,1),
+(15,1),
+(16,1),
+(17,1),
+(18,1),
+(19,1),
+(1,2),
+(3,2),
+(4,2),
+(5,2),
+(6,2),
+(1,3),
+(2,3),
+(4,3),
+(5,3),
+(1,4),
+(2,4),
+(3,4),
+(1,5),
+(3,5),
+(6,5),
+(2,6),
+(4,6),
+(8,6),
+(1,7),
+(5,7),
+(8,7),
+(2,8),
+(3,8),
+(6,8),
+(1,9),
+(4,9),
+(7,9),
+(3,10),
+(5,10),
+(8,10),
+(1,11),
+(2,11),
+(12,11),
+(1,12),
+(3,12),
+(14,12),
+(2,13),
+(4,13),
+(16,13),
+(3,14),
+(5,14),
+(18,14),
+(1,15),
+(6,15),
+(10,15);
+
+-- CURTIDAS
+-- Cada usuario pode curtir uma postagem uma unica vez.
+INSERT INTO curtida (idusuario, idpostagem)
+VALUES
+(2,1),
+(3,1),
+(4,1),
+(5,1),
+(6,1),
+(7,1),
+(8,1),
+(9,1),
+(10,1),
+(11,1),
+(12,1),
+(13,1),
+(14,1),
+(15,1),
+(16,1),
+(17,1),
+(18,1),
+(19,1),
+(2,2),
+(3,2),
+(4,2),
+(5,2),
+(1,6),
+(3,6),
+(4,6),
+(5,6),
+(1,7),
+(3,7),
+(5,7),
+(1,9),
+(2,9),
+(4,9),
+(1,10),
+(2,10),
+(5,10),
+(1,11),
+(2,11),
+(3,11),
+(1,12),
+(3,12),
+(4,12),
+(2,13),
+(3,13),
+(5,13),
+(1,14),
+(2,14),
+(6,14);
+
+-- As postagens 3, 4, 5, 8, 15, 16 e 17 podem ficar sem curtidas.
+
+-- COMENTARIOS
+INSERT INTO comentario
+(idcomentario, idusuario, idpostagem, texto)
+VALUES
+(1,2,1,'Comentario 1'),
+(2,3,1,'Comentario 2'),
+(3,4,1,'Comentario 3'),
+(4,5,1,'Comentario 4'),
+(5,1,6,'Comentario 5'),
+(6,3,6,'Comentario 6'),
+(7,1,9,'Comentario 7'),
+(8,2,9,'Comentario 8'),
+(9,4,10,'Comentario 9'),
+(10,5,10,'Comentario 10'),
+(11,2,11,'Comentario 11'),
+(12,3,12,'Comentario 12'),
+(13,4,13,'Comentario 13'),
+(14,5,14,'Comentario 14');
+
+-- ============================================
+-- CONSULTAS DE TESTE
+-- ============================================
+
+-- Usuarios sem postagens
+SELECT u.*
+FROM usuario u
+LEFT JOIN postagem p ON p.idusuario = u.idusuario
+WHERE p.idpostagem IS NULL;
+
+-- Usuarios sem seguidores
+SELECT u.*
+FROM usuario u
+LEFT JOIN seguir s ON s.idseguindo = u.idusuario
+WHERE s.idseguidor IS NULL;
+
+-- Usuarios que nao seguem ninguem
+SELECT u.*
+FROM usuario u
+LEFT JOIN seguir s ON s.idseguidor = u.idusuario
+WHERE s.idseguindo IS NULL;
+
+-- Quantidade de seguidores por usuario
+SELECT u.idusuario, u.nome, COUNT(s.idseguidor) AS total
+FROM usuario u
+LEFT JOIN seguir s ON s.idseguindo = u.idusuario
+GROUP BY u.idusuario, u.nome
+ORDER BY total DESC;
+
+-- Quantidade de postagens por usuario
+SELECT u.idusuario, u.nome, COUNT(p.idpostagem) AS total
+FROM usuario u
+LEFT JOIN postagem p ON p.idusuario = u.idusuario
+GROUP BY u.idusuario, u.nome
+ORDER BY total DESC;
+
+-- Postagens sem curtidas
+SELECT p.*
+FROM postagem p
+LEFT JOIN curtida c ON c.idpostagem = p.idpostagem
+WHERE c.idpostagem IS NULL;
+
+-- Postagens sem comentarios
+SELECT p.*
+FROM postagem p
+LEFT JOIN comentario c ON c.idpostagem = p.idpostagem
+WHERE c.idcomentario IS NULL;
+
+-- Total de curtidas por postagem
+SELECT p.idpostagem, p.texto, COUNT(c.idusuario) AS total
+FROM postagem p
+LEFT JOIN curtida c ON c.idpostagem = p.idpostagem
+GROUP BY p.idpostagem, p.texto
+ORDER BY total DESC;
+
+-- Total de comentarios por postagem
+SELECT p.idpostagem, p.texto, COUNT(c.idcomentario) AS total
+FROM postagem p
+LEFT JOIN comentario c ON c.idpostagem = p.idpostagem
+GROUP BY p.idpostagem, p.texto
+ORDER BY total DESC;
+
+-- Feed do usuario 1
+SELECT p.idpostagem, p.texto, p.data_hora, u.nome AS autor
+FROM seguir s
+JOIN postagem p ON p.idusuario = s.idseguindo
+JOIN usuario u ON u.idusuario = p.idusuario
+WHERE s.idseguidor = 1
+ORDER BY p.data_hora DESC;
+
+-- Relacionamentos reciprocos
+SELECT s1.idseguidor, s1.idseguindo
+FROM seguir s1
+JOIN seguir s2
+ON s1.idseguidor = s2.idseguindo
+AND s1.idseguindo = s2.idseguidor
+WHERE s1.idseguidor < s1.idseguindo;
+
+-- ============================================
+-- FIM
+-- ============================================
