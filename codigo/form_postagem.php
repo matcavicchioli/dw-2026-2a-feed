@@ -9,11 +9,11 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="salvar_postagem.php">
+    <form action="salvar_postagem.php" class="form">
         Texto: <br>
         <input type="text" name="texto"> <br><br>
 
-        <input type="submit" value="Publicar">
+        <input type="submit" value="Publicar" class="button">
     </form>
 </body>
 </html>

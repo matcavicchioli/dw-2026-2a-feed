@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="estilizar.css">
 </head>
 
 <body>
@@ -15,7 +16,7 @@
    
 
     <div class="postagens">
-        <a href="form_postagem.php"><button>POSTAR</button></a><br>
+        <a href="form_postagem.php" class="href"><button>POSTAR</button></a><br>
         <a href="listar_postagem.php" class="href"><button>VER TODAS AS POSTAGENS</button></a> <br>
         <a href="deslogar.php" class="href"><button>Sair...</button></a><br>
     <!-- </div> --> // se nao fechar esta div as postagens fica centralizadas, nao sei pq
