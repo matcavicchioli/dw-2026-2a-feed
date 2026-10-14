@@ -52,8 +52,6 @@
                 $idusuario = $linha['idusuario'];
                 $foto = $linha['foto'];
                 $nome = $linha['nome'];
-
-
                 ?>
             </div>
             <!-- INÍCIO DA POSTAGEM -->
@@ -64,8 +62,7 @@
 
                     <img src="<?php echo $foto; ?>">
                     <span class="nome-usuario">
-                        <?php echo $nome;
-                        echo $idusuario; ?>
+                        <?php echo $nome;?>
                     </span>
 
                     <span class="datahora">

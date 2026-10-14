@@ -21,7 +21,7 @@
 
         <?php
         require_once "conexao.php";
-
+        $idusuario = $_SESSION["idusuario"];
         $sql = "SELECT * FROM postagem WHERE idusuario = $idusuario";
         $resultados = mysqli_query($conexao, $sql);
 
