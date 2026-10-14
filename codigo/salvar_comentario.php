@@ -12,6 +12,6 @@ $sql = "INSERT INTO comentario (idpostagem, idusuario, texto) VALUES ('$idpostag
 
 mysqli_query($conexao, $sql);
 
-header("Location: listar_postagem.php");
+header("Location: feed.php");
 
 ?>

@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <a href="home.php"><button>voltar</button></a>
+    <a href="feed.php"><button>voltar</button></a>
     <a href="index.php"><button>sair</button></a>
 
     <h2>INSTAGRADO</h2>
