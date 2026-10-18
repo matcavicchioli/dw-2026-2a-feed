@@ -30,8 +30,6 @@
         resultado2 = meus posts -->
             <?php
             require_once "conexao.php";
-            $banana = " TU NAO SEGUE NINGUEM";
-            $ana = "vc SEGUE ALGUEM"; //pra printar se sigo ou nao
             
             $sql1 = "SELECT u.* FROM usuario u LEFT JOIN seguir s ON s.idseguidor = u.idusuario WHERE s.idseguindo IS NULL";
             $resultado1 = mysqli_query($conexao, $sql1);
@@ -42,7 +40,6 @@
             // $_SESSION['idusuario'] = $sigo['idusuario'];    
             if ($souumusuarioqnaosegueninguem == true) //se estou na lista (ou seja, nao sigo ngm) 
             {
-                echo $banana;
                 $sql2 = "SELECT postagem.idpostagem, postagem.texto, postagem.data_hora, postagem.idusuario, usuario.idusuario, usuario.nome, usuario.foto FROM postagem, usuario WHERE postagem.idusuario = $idusuario AND usuario.idusuario = $idusuario ORDER BY data_hora DESC";
                 $resultado2 = mysqli_query($conexao, $sql2);
                 while ($linha = mysqli_fetch_array($resultado2)) {
@@ -141,19 +138,24 @@
 
             } else {
                 //eu sigo alguem
-                echo $ana;
                 $sql5 = "SELECT seguir.idseguindo from seguir, usuario WHERE idseguidor = idusuario AND idusuario = $idusuario";
                 // SELECT usuario.nome, seguir.idseguindo from seguir, usuario WHERE idseguidor = idusuario AND idusuario = $idusuario
                 $resultado5 = mysqli_query($conexao, $sql5);
                 $quantidadedepessoasquesigo = mysqli_num_rows($resultado5);
-                echo $quantidadedepessoasquesigo;
-                // $quemeusigo = mysqli_fetch_assoc($resultado5);
-                for ($i = 1; $i <= $quantidadedepessoasquesigo; $i++) {
-                    $linha = mysqli_fetch_array($resultado5);
-                    $iddequemeusigo = $linha['idseguindo'];
-                    $sql6 = "SELECT postagem.*, usuario.idusuario, usuario.nome, usuario.foto FROM 
-                    postagem, usuario WHERE postagem.idusuario = $iddequemeusigo AND usuario.idusuario = $iddequemeusigo ORDER BY data_hora DESC";
-                    $resultado6 = mysqli_query($conexao, $sql6);
+                echo "<br> <h1> Você segue $quantidadedepessoasquesigo pessoas </h1>";
+                $sql6 = "SELECT p.idpostagem, p.texto, p.data_hora, u.idusuario, u.nome, u.foto FROM seguir s
+                JOIN postagem p ON p.idusuario = s.idseguindo JOIN usuario u ON u.idusuario = p.idusuario
+                WHERE s.idseguidor = $idusuario
+
+                UNION
+
+                SELECT p.idpostagem, p.texto, p.data_hora, u.idusuario, u.nome, u.foto
+                FROM postagem p
+                JOIN usuario u ON u.idusuario = p.idusuario
+                WHERE p.idusuario = $idusuario
+                ORDER BY data_hora DESC;";
+                $resultado6 = mysqli_query($conexao, $sql6);
+                
 
                     while ($linha = mysqli_fetch_array($resultado6)) {
                         $idpostagem = $linha['idpostagem'];
@@ -250,7 +252,7 @@
                     }
 
                 }
-            }
+            
             // verificar quem eu sigo (select das pessoas que sigo e possuem post)
             //SE tais pessoas pussuirem posts, mostrar os posts(e ordenar. Futuramente a adição de uma dlc de botão que ordene os post de acordo com a escolha categorica do usuario).
             //SE NAO, falar pro usuario seguir alguem que tenha posts(possivel trabalho de outro grupo - mostrar usuarios que nao sigo e que possuem post e que sao recomendaveis o seguimento meritocrata do "eu". Afinal, quem é o "eu") 
