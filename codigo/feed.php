@@ -25,6 +25,7 @@
          sql2 = meus posts
          sql3 = procura comentario
          sql4 = tras os comentarios
+         ta repetindo
 
         resultado1 = pegar os resultados de quem nao segue
         resultado2 = meus posts -->
@@ -127,11 +128,12 @@
                                 <input type="text" name="texto" placeholder="Digite seu comentário" required>
 
                                 <input type="submit" value="Comentar">
+                                
+                                
 
                             </form>
 
                         </div>
-
                     </div>
                     <?php
                 }
@@ -246,6 +248,7 @@
                                 </form>
 
                             </div>
+                            <a href="excluir_postagem.php?idpostagem=<?php echo $idpostagem; ?>">excluir post</a>
 
                         </div>
                         <?php
